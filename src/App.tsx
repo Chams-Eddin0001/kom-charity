@@ -11,6 +11,8 @@ import AllNewsPage from "./pages/AllNewsPage";
 import GetInvolvedPage from "./pages/GetInvolvedPage";
 import ContactPage from "./pages/ContactPage";
 import DonatePage from "./pages/DonatePage";
+import AnnualReportsPage from "./pages/AnnualReportsPage";
+import ImpactStoriesPage from "./pages/ImpactStoriesPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "./components/ui/tooltip";
 
@@ -32,6 +34,8 @@ const App = () => (
           <Route path="/get-involved" element={<GetInvolvedPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/donate" element={<DonatePage />} />
+          <Route path="/annual-reports" element={<AnnualReportsPage />} />
+          <Route path="/impact-stories" element={<ImpactStoriesPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

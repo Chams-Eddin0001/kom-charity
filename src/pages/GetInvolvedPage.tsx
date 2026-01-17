@@ -25,7 +25,7 @@ const GetInvolvedPage = () => {
         {
             icon: Handshake,
             title: "Partner With Us",
-            description: "Corporate partnerships and collaborations help amplify our impact. Let's work together.",
+            description: "Corporate partnerships and collaborations help amplify our impact. Let's work together to create a brighter future for all.",
             cta: "Become a Partner",
             gradient: "from-purple-500 to-purple-600",
             bgLight: "from-purple-50 to-purple-100"
