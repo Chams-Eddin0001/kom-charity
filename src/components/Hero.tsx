@@ -58,19 +58,19 @@ const Hero = () => {
                         {/* Stats */}
                         <div className="grid grid-cols-3 gap-6 pt-8 border-t border-gray-200">
                             <div className="text-center lg:text-left">
-                                <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-purple-500 bg-clip-text text-transparent">
+                                <div className="text-4xl md:text-5xl font-bold text-gray-900">
                                     2000+
                                 </div>
                                 <div className="text-sm md:text-base text-gray-600 mt-1 font-medium">Citations</div>
                             </div>
                             <div className="text-center lg:text-left">
-                                <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
+                                <div className="text-4xl md:text-5xl font-bold text-gray-900">
                                     184+
                                 </div>
                                 <div className="text-sm md:text-base text-gray-600 mt-1 font-medium">Publications</div>
                             </div>
                             <div className="text-center lg:text-left">
-                                <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-700 to-gray-900 bg-clip-text text-transparent">
+                                <div className="text-4xl md:text-5xl font-bold text-gray-900">
                                     15+
                                 </div>
                                 <div className="text-sm md:text-base text-gray-600 mt-1 font-medium">Years Experience</div>

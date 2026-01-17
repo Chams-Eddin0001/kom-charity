@@ -49,9 +49,7 @@ const Footer = () => {
                             </div>
                             <span className="text-xl font-bold">Kommunity Foundation</span>
                         </div>
-                        <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                            Led by Professor Khmaies Ouahada, advancing smart technologies and engineering education at the University of Johannesburg.
-                        </p>
+                        
                         {/* Scroll to top button */}
                         <button
                             onClick={scrollToTop}

@@ -68,11 +68,11 @@ const AboutPage = () => {
                                         and co-founder of the Centre for Smart Communications Systems.
                                     </p>
                                     <div className="flex flex-wrap gap-3">
-                                        <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-medium">DEng</span>
-                                        <span className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">MIng</span>
+                                        <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">DEng</span>
+                                        <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">MIng</span>
                                         <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">BScEng</span>
-                                        <span className="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm font-medium">NRF-C3 Rated</span>
-                                        <span className="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-sm font-medium">IEEE Senior Member</span>
+                                        <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">NRF-C3 Rated</span>
+                                        <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">IEEE Senior Member</span>
                                     </div>
                                 </div>
                             </div>

@@ -1,4 +1,4 @@
-import { GraduationCap, HeartPulse, Home, Droplets, ArrowRight, TrendingUp } from "lucide-react";
+import { Cpu, Zap, GraduationCap, Home, ArrowRight, TrendingUp } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Card } from "../components/ui/card";
@@ -7,34 +7,34 @@ import { Button } from "../components/ui/button";
 const ProgramsPage = () => {
     const programs = [
         {
-            icon: GraduationCap,
-            title: "Education & Literacy",
-            description: "Building schools, providing scholarships, and ensuring quality education for children in underserved communities.",
-            stats: "15,000+ students supported",
+            icon: Cpu,
+            title: "Smart Communications & AI",
+            description: "Advancing artificial intelligence, telecommunications, and power-line communications research. Leading innovations in 5G connectivity and machine learning applications.",
+            stats: "80+ journal articles published",
             gradient: "from-purple-500 to-purple-600",
             bgGradient: "from-purple-50 to-purple-100"
         },
         {
-            icon: HeartPulse,
-            title: "Healthcare Access",
-            description: "Mobile clinics, medical supplies, and health awareness programs bringing care to remote areas.",
-            stats: "30,000+ patients treated annually",
+            icon: Zap,
+            title: "Renewable Energy & Smart Grid",
+            description: "Research in energy demand management, renewable energy optimization, and smart grid technologies for sustainable infrastructure development.",
+            stats: "Contributing to UN SDGs",
             gradient: "from-orange-500 to-orange-600",
             bgGradient: "from-orange-50 to-orange-100"
         },
         {
-            icon: Home,
-            title: "Housing & Shelter",
-            description: "Safe housing initiatives and emergency shelter for families affected by crisis and displacement.",
-            stats: "5,000+ homes built",
+            icon: GraduationCap,
+            title: "Engineering Education",
+            description: "Developing innovative pedagogical methods and mentoring future engineers. Currently supervising 3 postdoctoral researchers, 9 PhD and 7 Master's students.",
+            stats: "19+ students supervised",
             gradient: "from-gray-700 to-gray-800",
             bgGradient: "from-gray-50 to-gray-100"
         },
         {
-            icon: Droplets,
-            title: "Clean Water Projects",
-            description: "Installing water wells, purification systems, and sanitation facilities in water-scarce regions.",
-            stats: "200+ wells established",
+            icon: Home,
+            title: "Smart Home Technologies",
+            description: "Chairman of the Smart Home Lab, pioneering research in visible light communications, wireless sensor networks, and smart cities applications.",
+            stats: "Centre for Smart Communications founder",
             gradient: "from-purple-600 to-orange-500",
             bgGradient: "from-purple-50 to-orange-50"
         }
@@ -52,12 +52,12 @@ const ProgramsPage = () => {
                         <div className="section-header">
                             <div className="inline-block mb-4">
                                 <span className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold">
-                                    What We Do
+                                    Research & Innovation
                                 </span>
                             </div>
-                            <h2 className="section-title">Our Programs & Projects</h2>
+                            <h2 className="section-title">Our Research Programs</h2>
                             <p className="section-description">
-                                We focus on sustainable, community-driven initiatives that create lasting impact across multiple sectors.
+                                Led by Professor Khmaies Ouahada, our programs focus on cutting-edge research in telecommunications, AI, and sustainable technologies.
                             </p>
                         </div>
 
