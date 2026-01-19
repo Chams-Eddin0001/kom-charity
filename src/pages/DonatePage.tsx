@@ -168,7 +168,7 @@ const DonatePage = () => {
                                         Your support directly funds engineering education, research publications,
                                         and student development programs in South Africa.
                                     </p>
-                                    <ul className="space-y-2 text-sm text-gray-100">
+                                    <ul className="space-y-2 text-sm text-gray-600">
                                         <li>• 100% goes to educational initiatives</li>
                                         <li>• Supporting 19+ students currently</li>
                                         <li>• 184+ research publications funded</li>    
