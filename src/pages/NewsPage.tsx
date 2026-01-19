@@ -37,49 +37,44 @@ const NewsPage = () => {
     ];
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen bg-white">
             <Header />
             <main className="pt-20">
-                <section className="py-20 md:py-28 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-                    <div className="absolute top-20 left-0 w-72 h-72 bg-orange-200/20 rounded-full blur-3xl"></div>
-                    <div className="absolute bottom-20 right-0 w-72 h-72 bg-purple-200/20 rounded-full blur-3xl"></div>
-
+                <section className="py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white">
                     <div className="container mx-auto px-4">
                         <div className="section-header">
-                            <div className="inline-block mb-4">
-                                <span className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold">
-                                    Research Updates
-                                </span>
-                            </div>
-                            <h2 className="section-title">News & Publications</h2>
+                            <span className="inline-block bg-gray-100 text-gray-600 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
+                                Research Updates
+                            </span>
+                            <h1 className="section-title">News & Publications</h1>
                             <p className="section-description">
-                                Stay informed about the latest research publications, breakthroughs, and academic achievements from Professor Khmaies Ouahada's team.
+                                Stay informed about the latest research publications and achievements from Professor Khmaies Ouahada's team.
                             </p>
                         </div>
 
-                        <div className="grid md:grid-cols-3 gap-8 mb-16">
+                        <div className="grid md:grid-cols-3 gap-6 mb-12">
                             {newsItems.map((item, index) => (
-                                <Card key={index} className="card-interactive overflow-hidden border border-gray-100">
-                                    <div className="relative h-56 overflow-hidden">
+                                <Card key={index} className="overflow-hidden border border-gray-200 rounded-xl shadow-sm hover:shadow-md hover:border-gray-300 transition-all group">
+                                    <div className="relative h-48 overflow-hidden">
                                         <img
                                             src={item.image}
                                             alt={item.title}
-                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                         />
-                                        <div className="absolute top-4 left-4 bg-white text-gray-900 px-4 py-2 rounded-full text-xs font-bold shadow-lg">
+                                        <div className="absolute top-3 left-3 bg-white text-gray-700 px-3 py-1 rounded-full text-xs font-medium shadow-sm">
                                             {item.category}
                                         </div>
                                     </div>
-                                    <div className="p-6">
-                                        <div className="flex items-center gap-2 text-sm text-gray-500 mb-4">
+                                    <div className="p-5">
+                                        <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
                                             <Calendar className="w-4 h-4" />
-                                            <span className="font-medium">{item.date}</span>
+                                            <span>{item.date}</span>
                                         </div>
-                                        <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                                        <p className="text-gray-600 mb-6 leading-relaxed">{item.excerpt}</p>
-                                        <Link to={`/news/${item.slug}`} className="flex items-center gap-2 text-gray-700 font-semibold hover:text-gray-900 transition-colors">
-                                            <span>Read More</span>
-                                            <ArrowRight className="w-5 h-5" />
+                                        <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
+                                        <p className="text-gray-600 text-sm mb-4 leading-relaxed">{item.excerpt}</p>
+                                        <Link to={`/news/${item.slug}`} className="inline-flex items-center gap-1 text-gray-700 font-medium text-sm hover:text-purple-600 transition-colors group">
+                                            Read More
+                                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                         </Link>
                                     </div>
                                 </Card>
@@ -88,9 +83,9 @@ const NewsPage = () => {
 
                         <div className="text-center">
                             <Link to="/all-news">
-                                <Button size="lg" variant="outline" className="border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white font-semibold px-8 py-6 rounded-xl">
+                                <Button variant="outline" className="border border-gray-300 text-gray-700 hover:bg-gray-50 font-medium px-6 py-2 rounded-lg">
                                     View All News
-                                    <ArrowRight className="ml-2 w-5 h-5" />
+                                    <ArrowRight className="ml-2 w-4 h-4" />
                                 </Button>
                             </Link>
                         </div>

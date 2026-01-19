@@ -28,45 +28,35 @@ const Footer = () => {
     };
 
     return (
-        <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-16 relative overflow-hidden">
-            {/* Background pattern */}
-            <div className="absolute inset-0 opacity-5" style={{
-                backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
-                backgroundSize: '40px 40px'
-            }}></div>
-
-            {/* Decorative gradient orbs */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl"></div>
-
-            <div className="container mx-auto px-4 relative z-10">
-                <div className="grid md:grid-cols-4 gap-12 mb-12">
+        <footer className="bg-gray-900 text-white py-12">
+            <div className="container mx-auto px-4">
+                <div className="grid md:grid-cols-4 gap-10 mb-10">
                     {/* Logo & Description */}
                     <div className="md:col-span-1">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="bg-gradient-to-br from-gray-700 to-gray-800 p-3 rounded-xl shadow-lg">
-                                <Heart className="w-7 h-7 text-white" fill="currentColor" />
+                        <div className="flex items-center gap-2 mb-4">
+                            <div className="bg-gray-800 p-2 rounded-lg">
+                                <Heart className="w-5 h-5 text-white" fill="currentColor" />
                             </div>
-                            <span className="text-xl font-bold">Kommunity Foundation</span>
+                            <span className="text-lg font-semibold">Kommunity Foundation</span>
                         </div>
-                        
+
                         {/* Scroll to top button */}
                         <button
                             onClick={scrollToTop}
-                            className="flex items-center gap-2 text-sm text-purple-400 hover:text-purple-300 transition-colors group"
+                            className="flex items-center gap-2 text-sm text-gray-400 hover:text-purple-400 transition-colors group"
                         >
                             <span>Back to top</span>
-                            <ArrowUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform" />
+                            <ArrowUp className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
                         </button>
                     </div>
 
                     {/* Links */}
                     {Object.entries(footerLinks).map(([title, links]) => (
                         <div key={title}>
-                            <h4 className="font-bold mb-6 text-white text-lg">
+                            <h4 className="font-semibold mb-4 text-white">
                                 {title}
                             </h4>
-                            <ul className="space-y-3">
+                            <ul className="space-y-2">
                                 {links.map((link) => (
                                     <li key={link}>
                                         <Link
@@ -83,12 +73,10 @@ const Footer = () => {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="border-t border-gray-800 pt-8">
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                        <p className="text-sm text-gray-400 text-center md:text-left">
-                            © 2025 Kommunity Foundation. Led by Prof. Khmaies Ouahada, University of Johannesburg.
-                        </p>
-                    </div>
+                <div className="border-t border-gray-800 pt-6">
+                    <p className="text-sm text-gray-500 text-center md:text-left">
+                        © 2025 Kommunity Foundation. Led by Prof. Khmaies Ouahada, University of Johannesburg.
+                    </p>
                 </div>
             </div>
         </footer>
