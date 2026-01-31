@@ -69,7 +69,10 @@ export const ImageUpload = ({ value, onChange, label = "Image", className = "" }
         }
     };
 
-    const handleRemove = async () => {
+    const handleRemove = async (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+
         if (value && value.includes('/images/')) {
             // Extract file path from URL
             try {
@@ -124,14 +127,16 @@ export const ImageUpload = ({ value, onChange, label = "Image", className = "" }
                     </div>
                 )}
 
-                <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml"
-                    onChange={handleFileChange}
-                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                    disabled={isUploading}
-                />
+                {!value && (
+                    <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml"
+                        onChange={handleFileChange}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                        disabled={isUploading}
+                    />
+                )}
             </div>
 
             {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
