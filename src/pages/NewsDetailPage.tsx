@@ -1,76 +1,25 @@
-import { Calendar, ArrowLeft, User, BookOpen } from "lucide-react";
+import { Calendar, ArrowLeft, User, ArrowRight } from "lucide-react";
 import { useParams, Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Button } from "../components/ui/button";
-
-const newsData: Record<string, {
-    date: string;
-    title: string;
-    category: string;
-    content: string[];
-    author: string;
-}> = {
-    "machine-learning-medical-image": {
-        date: "January 2025",
-        title: "Machine Learning for Medical Image Analysis",
-        category: "AI Research",
-        author: "Prof. Khmaies Ouahada",
-        content: [
-            "Our research team has published groundbreaking work on transformer-inspired training principles for breast cancer prediction, combining EfficientNetB0 and ResNet50 architectures to achieve improved diagnostic accuracy.",
-            "This research addresses one of healthcare's most critical challenges: early and accurate detection of breast cancer. By leveraging advanced deep learning architectures, we've developed a model that can analyze medical images with unprecedented precision.",
-            "The study combines the efficiency of EfficientNetB0 with the robust feature extraction capabilities of ResNet50, creating a hybrid approach that outperforms traditional single-architecture models.",
-            "Key findings include improved sensitivity in detecting early-stage tumors and reduced false-positive rates, which could significantly impact clinical workflows and patient outcomes.",
-            "This work is part of our ongoing commitment to applying artificial intelligence for healthcare improvement, particularly in developing nations where access to specialist radiologists may be limited."
-        ]
-    },
-    "llm-education": {
-        date: "December 2024",
-        title: "Large Language Models in Education",
-        category: "Education Tech",
-        author: "Prof. Khmaies Ouahada",
-        content: [
-            "A comprehensive review has been published examining the issues and solutions surrounding Large Language Models (LLMs) in learning environments, providing valuable insights for educators and institutions.",
-            "As LLMs like ChatGPT become increasingly prevalent in educational settings, understanding their impact, limitations, and best practices for integration becomes crucial for effective teaching and learning.",
-            "Our review addresses key challenges including academic integrity concerns, the potential for misinformation, and the need for critical thinking skills when interacting with AI-generated content.",
-            "We propose practical solutions and frameworks for educators to harness the benefits of LLMs while mitigating risks, including assessment redesign strategies and AI literacy curricula.",
-            "The paper also explores how LLMs can be leveraged to personalize learning experiences, provide instant feedback, and support students with diverse learning needs.",
-            "This research aligns with our broader mission of advancing engineering education through innovative pedagogical methods and emerging technologies."
-        ]
-    },
-    "5g-millimeter-wave": {
-        date: "November 2024",
-        title: "5G Millimeter Wave Connectivity",
-        category: "Telecommunications",
-        author: "Prof. Khmaies Ouahada",
-        content: [
-            "Our latest publication presents an effective path loss modeling approach for 5G millimeter wave connectivity, advancing the field of next-generation telecommunications.",
-            "As 5G networks continue to roll out globally, understanding and accurately predicting signal propagation in the millimeter wave spectrum is essential for network planning and optimization.",
-            "The research introduces novel mathematical models that account for various environmental factors affecting mmWave signals, including atmospheric conditions, building materials, and urban density.",
-            "Our approach provides more accurate predictions than existing models, enabling network operators to optimize base station placement and improve coverage in challenging environments.",
-            "The findings have significant implications for smart city development, where reliable high-speed connectivity is fundamental to IoT applications, autonomous vehicles, and other emerging technologies.",
-            "This work represents Professor Ouahada's continued leadership in telecommunications research, contributing to South Africa's position in the global 5G ecosystem."
-        ]
-    }
-};
+import { useAdminData } from "../hooks/useAdminData";
 
 const NewsDetailPage = () => {
     const { slug } = useParams<{ slug: string }>();
-    const article = slug ? newsData[slug] : null;
+    const news = useAdminData('news');
+    const article = news.find(n => n.slug === slug);
 
     if (!article) {
         return (
             <div className="min-h-screen">
                 <Header />
-                <main className="pt-20">
+                <main className="pt-28">
                     <div className="container mx-auto px-4 py-20 text-center">
-                        <h1 className="text-3xl font-bold text-gray-900 mb-4">Article Not Found</h1>
+                        <h1 className="font-serif text-3xl mb-4">Article Not Found</h1>
                         <p className="text-gray-600 mb-8">The article you're looking for doesn't exist.</p>
-                        <Link to="/news">
-                            <Button className="bg-gray-900 hover:bg-gray-800 text-white">
-                                <ArrowLeft className="mr-2 w-4 h-4" />
-                                Back to News
-                            </Button>
+                        <Link to="/news" className="btn-primary">
+                            <ArrowLeft className="w-4 h-4" />
+                            Back to News
                         </Link>
                     </div>
                 </main>
@@ -79,71 +28,125 @@ const NewsDetailPage = () => {
         );
     }
 
+    // Get related articles (same category, excluding current)
+    const relatedArticles = news
+        .filter(n => n.category === article.category && n.id !== article.id)
+        .slice(0, 3);
+
     return (
         <div className="min-h-screen">
             <Header />
-            <main className="pt-20">
-                <article className="py-16 md:py-24">
-                    <div className="container mx-auto px-4">
-                        {/* Back Link */}
-                        <Link to="/news" className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors">
-                            <ArrowLeft className="w-4 h-4" />
-                            <span className="font-medium">Back to News</span>
-                        </Link>
+            <main className="pt-28">
+                <article>
+                    {/* Hero with Image */}
+                    <section className="relative h-[40vh] md:h-[50vh] bg-gray-100">
+                        {article.image ? (
+                            <img
+                                src={article.image}
+                                alt={article.title}
+                                className="w-full h-full object-cover"
+                            />
+                        ) : (
+                            <div className="w-full h-full bg-gradient-to-br from-[#9333EA] to-[#FF7A52]" />
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
-                        {/* Article Header */}
-                        <div className="max-w-3xl mx-auto">
-                            <div className="mb-6">
-                                <span className="bg-purple-100 text-purple-700 px-4 py-1.5 rounded-full text-sm font-semibold">
+                        {/* Back Link */}
+                        <div className="absolute top-8 left-0 right-0">
+                            <div className="container mx-auto px-4">
+                                <Link to="/news" className="inline-flex items-center gap-2 text-white hover:text-gray-200 transition-colors">
+                                    <ArrowLeft className="w-4 h-4" />
+                                    <span className="font-medium">Back to News</span>
+                                </Link>
+                            </div>
+                        </div>
+
+                        {/* Title Overlay */}
+                        <div className="absolute bottom-0 left-0 right-0 pb-12">
+                            <div className="container mx-auto px-4">
+                                <span className="inline-block bg-white text-black px-3 py-1 rounded text-sm font-medium mb-4">
                                     {article.category}
                                 </span>
+                                <h1 className="font-serif text-3xl md:text-4xl lg:text-5xl text-white max-w-4xl">
+                                    {article.title}
+                                </h1>
                             </div>
+                        </div>
+                    </section>
 
-                            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-                                {article.title}
-                            </h1>
-
-                            <div className="flex flex-wrap items-center gap-6 text-gray-600 mb-12 pb-8 border-b border-gray-200">
+                    {/* Article Meta */}
+                    <section className="py-8 border-b border-gray-200">
+                        <div className="container mx-auto px-4">
+                            <div className="flex flex-wrap items-center gap-6 text-gray-600">
                                 <div className="flex items-center gap-2">
                                     <Calendar className="w-5 h-5" />
                                     <span>{article.date}</span>
                                 </div>
-                                <div className="flex items-center gap-2">
-                                    <User className="w-5 h-5" />
-                                    <span>{article.author}</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <BookOpen className="w-5 h-5" />
-                                    <span>{article.content.length} min read</span>
-                                </div>
-                            </div>
-
-                            {/* Article Content */}
-                            <div className="prose prose-lg max-w-none">
-                                {article.content.map((paragraph, index) => (
-                                    <p key={index} className="text-gray-700 leading-relaxed mb-6 text-lg">
-                                        {paragraph}
-                                    </p>
-                                ))}
-                            </div>
-
-                            {/* Author Card */}
-                            <div className="mt-12 p-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl">
-                                <div className="flex items-start gap-6">
-                                    <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-purple-500 to-orange-500 flex items-center justify-center flex-shrink-0">
-                                        <User className="w-8 h-8 text-white" />
+                                {article.author && (
+                                    <div className="flex items-center gap-2">
+                                        <User className="w-5 h-5" />
+                                        <span>{article.author}</span>
                                     </div>
-                                    <div>
-                                        <h3 className="text-xl font-bold text-gray-900 mb-2">{article.author}</h3>
-                                        <p className="text-gray-600 leading-relaxed">
-                                            Full Professor in Electrical and Electronic Engineering Science at the University of Johannesburg.
-                                            Expert in AI, Telecommunications, and Smart Technologies with over 184 publications.
-                                        </p>
-                                    </div>
-                                </div>
+                                )}
                             </div>
                         </div>
-                    </div>
+                    </section>
+
+                    {/* Article Content */}
+                    <section className="py-12">
+                        <div className="container mx-auto px-4">
+                            <div className="max-w-3xl mx-auto">
+                                <p className="text-xl text-gray-600 leading-relaxed mb-8">
+                                    {article.excerpt}
+                                </p>
+                                {article.content && (
+                                    <div
+                                        className="prose prose-lg max-w-none text-gray-700"
+                                        dangerouslySetInnerHTML={{ __html: article.content }}
+                                    />
+                                )}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Related Articles */}
+                    {relatedArticles.length > 0 && (
+                        <section className="py-16 bg-[#f7f7f7]">
+                            <div className="container mx-auto px-4">
+                                <h2 className="font-serif text-2xl md:text-3xl mb-8">Related Articles</h2>
+                                <div className="grid md:grid-cols-3 gap-8">
+                                    {relatedArticles.map((related) => (
+                                        <Link
+                                            key={related.id}
+                                            to={`/news/${related.slug}`}
+                                            className="group bg-white rounded-lg overflow-hidden hover:shadow-lg transition-all"
+                                        >
+                                            <div className="aspect-[4/3] relative overflow-hidden bg-gray-100">
+                                                {related.image ? (
+                                                    <img
+                                                        src={related.image}
+                                                        alt={related.title}
+                                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                    />
+                                                ) : (
+                                                    <div className="w-full h-full bg-gradient-to-br from-[#9333EA] to-[#FF7A52]" />
+                                                )}
+                                            </div>
+                                            <div className="p-6">
+                                                <h3 className="font-serif text-lg group-hover:text-gray-600 transition-colors">
+                                                    {related.title}
+                                                </h3>
+                                                <span className="inline-flex items-center gap-1 text-sm text-gray-500 mt-2">
+                                                    Read More
+                                                    <ArrowRight className="w-3 h-3" />
+                                                </span>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+                    )}
                 </article>
             </main>
             <Footer />

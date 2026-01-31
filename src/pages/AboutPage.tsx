@@ -1,124 +1,142 @@
-import { Target, Eye, Award, Users, GraduationCap } from "lucide-react";
+import { Target, Eye, Award, Users, GraduationCap, ArrowRight } from "lucide-react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Card } from "../components/ui/card";
+import { Link } from "react-router-dom";
+import { useAdminData } from "../hooks/useAdminData";
 
 const AboutPage = () => {
-    const values = [
-        {
-            icon: Target,
-            title: "Our Mission",
-            description: "To empower communities through sustainable development, technology innovation, and engineering education that creates lasting positive change.",
-            color: "purple"
-        },
-        {
-            icon: Eye,
-            title: "Our Vision",
-            description: "Contributing to South Africa's economic development by nurturing highly skilled engineers and advancing smart communication technologies.",
-            color: "orange"
-        },
-        {
-            icon: Award,
-            title: "Our Values",
-            description: "Integrity, ethical values, compassion, and innovation guide our work as we support students and drive meaningful technological advancement.",
-            color: "purple"
-        },
-        {
-            icon: Users,
-            title: "Our Approach",
-            description: "Collaborative learning, mentorship, and international partnerships to create opportunities for growth and development.",
-            color: "orange"
-        }
-    ];
+    const about = useAdminData('about');
+    const team = useAdminData('team');
+    const stats = useAdminData('stats');
+
+    const valueIcons = [Target, Eye, Award, Users];
 
     return (
         <div className="min-h-screen">
             <Header />
-            <main className="pt-20">
-                <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+            <main className="pt-28">
+                {/* Hero Section */}
+                <section className="py-16 md:py-24 bg-white">
                     <div className="container mx-auto px-4">
-                        {/* Header */}
-                        <div className="section-header">
-                            <h2 className="section-title">About Us</h2>
-                            <p className="section-description">
-                                Kommunity Foundation is led by Professor Khmaies Ouahada, a distinguished academic and researcher
-                                dedicated to empowering communities through education, technology, and sustainable development.
+                        <div className="max-w-3xl">
+                            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-6">
+                                About <span className="highlight-purple">Us</span>
+                            </h1>
+                            <p className="text-xl text-gray-600 leading-relaxed">
+                                {about.mission}
                             </p>
                         </div>
+                    </div>
+                </section>
 
-                        {/* Founder Section */}
-                        <div className="mb-16 bg-white rounded-3xl p-8 md:p-12 shadow-lg border border-gray-100">
-                            <div className="flex flex-col lg:flex-row gap-8 items-start">
-                                <div className="flex-shrink-0">
-                                    <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-purple-500 to-orange-500 flex items-center justify-center shadow-lg">
-                                        <GraduationCap className="w-12 h-12 text-white" />
-                                    </div>
+                {/* Mission & Vision */}
+                <section className="py-16 bg-[#f7f7f7]">
+                    <div className="container mx-auto px-4">
+                        <div className="grid md:grid-cols-2 gap-12">
+                            <div className="bg-white p-8 rounded-lg">
+                                <div className="w-16 h-16 bg-[#9333EA] rounded-lg flex items-center justify-center mb-6">
+                                    <Target className="w-8 h-8 text-black" />
                                 </div>
-                                <div className="flex-1">
-                                    <h3 className="text-2xl font-bold text-gray-900 mb-2">Prof. Khmaies Ouahada</h3>
-                                    <p className="text-purple-600 font-semibold mb-4">Founder & Chairman</p>
-                                    <p className="text-gray-600 leading-relaxed mb-4">
-                                        Professor Khmaies Ouahada is a Full Professor in the Department of Electrical and Electronic Engineering Science
-                                        at the University of Johannesburg. He served as Head of Department from 2018 to 2021 and was awarded the
-                                        Vice-Chancellor's Teaching and Learning Excellence Award in 2016.
-                                    </p>
-                                    <p className="text-gray-600 leading-relaxed mb-4">
-                                        His research expertise spans Artificial Intelligence, Telecommunications, Power-Line Communications, Visible Light Communications,
-                                        Smart Home technologies, Smart Grid, Smart Cities, and Renewable Energy. He is Chairman of the Smart Home Lab
-                                        and co-founder of the Centre for Smart Communications Systems.
-                                    </p>
-                                    <div className="flex flex-wrap gap-3">
-                                        <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">DEng</span>
-                                        <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">MIng</span>
-                                        <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">BScEng</span>
-                                        <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">NRF-C3 Rated</span>
-                                        <span className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium">IEEE Senior Member</span>
-                                    </div>
+                                <h2 className="font-serif text-2xl mb-4">Our Mission</h2>
+                                <p className="text-gray-600 leading-relaxed">{about.mission}</p>
+                            </div>
+                            <div className="bg-white p-8 rounded-lg">
+                                <div className="w-16 h-16 bg-[#FF7A52] rounded-lg flex items-center justify-center mb-6">
+                                    <Eye className="w-8 h-8 text-white" />
                                 </div>
+                                <h2 className="font-serif text-2xl mb-4">Our Vision</h2>
+                                <p className="text-gray-600 leading-relaxed">{about.vision}</p>
                             </div>
                         </div>
+                    </div>
+                </section>
 
-                        {/* Values Grid */}
-                        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                            {values.map((value) => {
-                                const Icon = value.icon;
-                                const isPurple = value.color === "purple";
-                                return (
-                                    <Card key={value.title} className="card-elevated text-center border border-gray-100 group">
-                                        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300 ${isPurple
-                                            ? 'bg-gradient-to-br from-purple-100 to-purple-200'
-                                            : 'bg-gradient-to-br from-orange-100 to-orange-200'
-                                            }`}>
-                                            <Icon className={`w-8 h-8 ${isPurple ? 'text-purple-600' : 'text-orange-500'}`} />
+                {/* History */}
+                <section className="py-16 bg-white">
+                    <div className="container mx-auto px-4">
+                        <div className="max-w-3xl mx-auto text-center">
+                            <h2 className="font-serif text-3xl md:text-4xl mb-6">Our History</h2>
+                            <p className="text-gray-600 leading-relaxed text-lg">{about.history}</p>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Core Values */}
+                {about.values.length > 0 && (
+                    <section className="py-16 bg-[#f7f7f7]">
+                        <div className="container mx-auto px-4">
+                            <h2 className="font-serif text-3xl md:text-4xl mb-12 text-center">Our Values</h2>
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {about.values.map((value, idx) => {
+                                    const Icon = valueIcons[idx % valueIcons.length];
+                                    return (
+                                        <Card key={idx} className="p-6 bg-white text-center">
+                                            <div className="w-14 h-14 bg-black rounded-lg flex items-center justify-center mx-auto mb-4">
+                                                <Icon className="w-7 h-7 text-white" />
+                                            </div>
+                                            <h3 className="font-serif text-xl mb-3">{value.title}</h3>
+                                            <p className="text-gray-600 text-sm">{value.description}</p>
+                                        </Card>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    </section>
+                )}
+
+                {/* Team Section */}
+                {team.length > 0 && (
+                    <section className="py-16 bg-white">
+                        <div className="container mx-auto px-4">
+                            <h2 className="font-serif text-3xl md:text-4xl mb-12 text-center">Our Team</h2>
+                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                {team.sort((a, b) => a.order - b.order).map((member) => (
+                                    <div key={member.id} className="text-center">
+                                        <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
+                                            {member.image ? (
+                                                <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                                            ) : (
+                                                <div className="w-full h-full bg-gradient-to-br from-[#9333EA] to-[#FF7A52] flex items-center justify-center">
+                                                    <GraduationCap className="w-12 h-12 text-white" />
+                                                </div>
+                                            )}
                                         </div>
-                                        <h3 className="text-xl font-bold text-gray-900 mb-3">{value.title}</h3>
-                                        <p className="text-gray-600 leading-relaxed text-sm">{value.description}</p>
-                                    </Card>
-                                );
-                            })}
-                        </div>
-
-                        {/* Stats Section */}
-                        <div className="mt-16 bg-gradient-to-r from-gray-900 to-gray-800 rounded-3xl p-8 md:p-12 shadow-2xl">
-                            <div className="grid md:grid-cols-4 gap-8 text-center text-white">
-                                <div>
-                                    <div className="text-4xl md:text-5xl font-bold mb-2">184+</div>
-                                    <div className="text-gray-300 text-sm">Research Publications</div>
-                                </div>
-                                <div>
-                                    <div className="text-4xl md:text-5xl font-bold mb-2">2000+</div>
-                                    <div className="text-gray-300 text-sm">Citations</div>
-                                </div>
-                                <div>
-                                    <div className="text-4xl md:text-5xl font-bold mb-2">19+</div>
-                                    <div className="text-gray-300 text-sm">Students Supervised</div>
-                                </div>
-                                <div>
-                                    <div className="text-4xl md:text-5xl font-bold mb-2">15+</div>
-                                    <div className="text-gray-300 text-sm">Years of Excellence</div>
-                                </div>
+                                        <h3 className="font-serif text-xl mb-1">{member.name}</h3>
+                                        <p className="text-[#FF7A52] font-medium text-sm mb-3">{member.role}</p>
+                                        <p className="text-gray-600 text-sm">{member.bio}</p>
+                                    </div>
+                                ))}
                             </div>
                         </div>
+                    </section>
+                )}
+
+                {/* Stats Section */}
+                <section className="py-16 bg-black text-white">
+                    <div className="container mx-auto px-4">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                            {stats.sort((a, b) => a.order - b.order).map((stat) => (
+                                <div key={stat.id}>
+                                    <div className="font-serif text-4xl md:text-5xl font-normal mb-2">{stat.number}</div>
+                                    <div className="text-gray-400 text-sm uppercase tracking-wide">{stat.label}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+
+                {/* CTA */}
+                <section className="py-16 bg-white">
+                    <div className="container mx-auto px-4 text-center">
+                        <h2 className="font-serif text-3xl md:text-4xl mb-6">Want to Learn More?</h2>
+                        <p className="text-gray-600 text-lg max-w-2xl mx-auto mb-8">
+                            Get in touch with us to learn more about our work and how you can get involved.
+                        </p>
+                        <Link to="/contact" className="btn-primary">
+                            Contact Us
+                            <ArrowRight className="w-4 h-4" />
+                        </Link>
                     </div>
                 </section>
             </main>

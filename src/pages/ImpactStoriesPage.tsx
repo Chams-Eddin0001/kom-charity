@@ -1,9 +1,8 @@
-import { Heart, Users, GraduationCap, Lightbulb, Quote, ArrowRight, Star } from "lucide-react";
+import { Users, GraduationCap, Lightbulb, Quote, ArrowRight, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Card } from "../components/ui/card";
-import { Button } from "../components/ui/button";
 
 const ImpactStoriesPage = () => {
     const featuredStory = {
@@ -140,25 +139,20 @@ const ImpactStoriesPage = () => {
                         </div>
 
                         {/* CTA Section */}
-                        <div className="text-center bg-gradient-to-r from-purple-50 to-orange-50 rounded-3xl p-8 md:p-12">
-                            <Heart className="w-12 h-12 text-purple-500 mx-auto mb-4" />
-                            <h3 className="text-2xl font-bold text-gray-900 mb-4">Be Part of the Next Success Story</h3>
+                        <div className="text-center bg-[#f7f7f7] rounded-lg p-8 md:p-12">
+                            <h3 className="font-serif text-2xl md:text-3xl text-black mb-4">Be Part of the Next Success Story</h3>
                             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-                                Your support helps create more success stories. Whether through donations, volunteering,
-                                or partnerships, you can make a lasting difference in someone's life.
+                                Your time and skills can help create more success stories. Join us as a volunteer or partner
+                                to make a lasting difference in someone's life.
                             </p>
                             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                <Link to="/donate">
-                                    <Button className="bg-gray-900 hover:bg-gray-800 text-white font-semibold px-8 py-6 rounded-xl shadow-lg">
-                                        Donate Now
-                                        <Heart className="ml-2 w-5 h-5" fill="currentColor" />
-                                    </Button>
+                                <Link to="/get-involved" className="btn-secondary">
+                                    Get Involved
+                                    <ArrowRight className="w-4 h-4" />
                                 </Link>
-                                <Link to="/get-involved">
-                                    <Button variant="outline" className="border-2 border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white font-semibold px-8 py-6 rounded-xl">
-                                        Get Involved
-                                        <ArrowRight className="ml-2 w-5 h-5" />
-                                    </Button>
+                                <Link to="/contact" className="btn-primary">
+                                    Contact Us
+                                    <ArrowRight className="w-4 h-4" />
                                 </Link>
                             </div>
                         </div>

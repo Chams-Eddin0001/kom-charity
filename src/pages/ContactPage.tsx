@@ -1,15 +1,17 @@
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useToast } from "../hooks/use-toast";
-import { Card } from "../components/ui/card";
-import { Input } from "../components/ui/input";
-import { Textarea } from "../components/ui/textarea";
-import { Button } from "../components/ui/button";
+import { useAdminData } from "../hooks/useAdminData";
+import { supabase } from "../lib/supabase";
 
 const ContactPage = () => {
     const { toast } = useToast();
+    const settings = useAdminData('settings');
+    const contact = useAdminData('contact');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -17,112 +19,220 @@ const ContactPage = () => {
         message: ""
     });
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        toast({
-            title: "Message Sent!",
-            description: "Thank you for reaching out. We'll get back to you soon.",
-        });
-        setFormData({ name: "", email: "", subject: "", message: "" });
+        if (!contact.formEnabled || isSubmitting) return;
+
+        setIsSubmitting(true);
+
+        try {
+            const { error } = await supabase
+                .from('contact_messages')
+                .insert({
+                    name: formData.name,
+                    email: formData.email,
+                    subject: formData.subject,
+                    message: formData.message,
+                    created_at: new Date().toISOString()
+                });
+
+            if (error) {
+                toast({
+                    title: "Error",
+                    description: "Failed to send message. Please try again.",
+                    variant: "destructive"
+                });
+            } else {
+                toast({
+                    title: "Message Sent!",
+                    description: "Thank you for reaching out. We'll get back to you soon.",
+                });
+                setFormData({ name: "", email: "", subject: "", message: "" });
+            }
+        } catch {
+            toast({
+                title: "Error",
+                description: "Failed to send message. Please try again.",
+                variant: "destructive"
+            });
+        }
+
+        setIsSubmitting(false);
     };
-
-    const contactInfo = [
-        { icon: Mail, title: "Email Us", detail: "kouahada@uj.ac.za", gradient: "from-purple-500 to-purple-600", bgLight: "bg-purple-50" },
-        { icon: Phone, title: "Call Us", detail: "+27 11 559 3864", gradient: "from-gray-700 to-gray-800", bgLight: "bg-gray-50" },
-        { icon: MapPin, title: "Visit Us", detail: "University of Johannesburg, Auckland Park Campus, South Africa", gradient: "from-orange-500 to-orange-600", bgLight: "bg-orange-50" }
-    ];
-
-    const socialLinks = [
-        { icon: Facebook, href: "#", label: "Facebook", color: "hover:bg-blue-600" },
-        { icon: Twitter, href: "#", label: "Twitter", color: "hover:bg-sky-500" },
-        { icon: Instagram, href: "#", label: "Instagram", color: "hover:bg-pink-600" },
-        { icon: Linkedin, href: "#", label: "LinkedIn", color: "hover:bg-blue-700" }
-    ];
 
     return (
         <div className="min-h-screen">
             <Header />
-            <main className="pt-20">
-                <section className="py-20 md:py-28 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-96 h-96 bg-purple-200/20 rounded-full blur-3xl"></div>
-                    <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-200/20 rounded-full blur-3xl"></div>
-
+            <main className="pt-28">
+                {/* Hero Section */}
+                <section className="py-16 md:py-24 bg-white">
                     <div className="container mx-auto px-4">
-                        <div className="section-header">
-                            <div className="inline-block mb-4">
-                                <span className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold">
-                                    Contact Us
-                                </span>
-                            </div>
-                            <h2 className="section-title">Get In Touch</h2>
-                            <p className="section-description">
+                        <div className="max-w-3xl">
+                            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-6">
+                                Get In <span className="highlight-purple">Touch</span>
+                            </h1>
+                            <p className="text-xl text-gray-600 leading-relaxed">
                                 Have questions or want to learn more about our work? We'd love to hear from you.
                             </p>
                         </div>
+                    </div>
+                </section>
 
+                {/* Contact Content */}
+                <section className="py-16 bg-[#f7f7f7]">
+                    <div className="container mx-auto px-4">
                         <div className="grid lg:grid-cols-3 gap-8">
+                            {/* Contact Info Column */}
                             <div className="space-y-6">
-                                {contactInfo.map((info) => {
-                                    const Icon = info.icon;
-                                    return (
-                                        <Card key={info.title} className="card-elevated border border-gray-100 group relative overflow-hidden">
-                                            <div className={`absolute inset-0 ${info.bgLight} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                                            <div className="relative z-10">
-                                                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${info.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-md`}>
-                                                    <Icon className="w-7 h-7 text-white" />
-                                                </div>
-                                                <h3 className="font-bold text-gray-900 mb-2 text-lg">{info.title}</h3>
-                                                <p className="text-gray-600 text-sm">{info.detail}</p>
-                                            </div>
-                                        </Card>
-                                    );
-                                })}
-
-                                <Card className="card-elevated border border-gray-100">
-                                    <h3 className="font-bold text-gray-900 mb-4 text-lg">Follow Us</h3>
-                                    <div className="flex gap-3">
-                                        {socialLinks.map((social) => {
-                                            const Icon = social.icon;
-                                            return (
-                                                <a key={social.label} href={social.href} className={`w-12 h-12 rounded-xl bg-gray-100 text-gray-700 hover:text-white flex items-center justify-center transition-all ${social.color} hover:scale-110`}>
-                                                    <Icon className="w-5 h-5" />
-                                                </a>
-                                            );
-                                        })}
+                                {/* Email */}
+                                <div className="bg-white p-6 rounded-lg">
+                                    <div className="w-14 h-14 bg-[#9333EA] rounded-lg flex items-center justify-center mb-4">
+                                        <Mail className="w-7 h-7 text-black" />
                                     </div>
-                                </Card>
+                                    <h3 className="font-serif text-lg mb-2">Email Us</h3>
+                                    <a href={`mailto:${settings.contactEmail}`} className="text-gray-600 hover:text-black transition-colors">
+                                        {settings.contactEmail}
+                                    </a>
+                                </div>
+
+                                {/* Phone */}
+                                <div className="bg-white p-6 rounded-lg">
+                                    <div className="w-14 h-14 bg-[#FF7A52] rounded-lg flex items-center justify-center mb-4">
+                                        <Phone className="w-7 h-7 text-white" />
+                                    </div>
+                                    <h3 className="font-serif text-lg mb-2">Call Us</h3>
+                                    <a href={`tel:${settings.contactPhone}`} className="text-gray-600 hover:text-black transition-colors">
+                                        {settings.contactPhone}
+                                    </a>
+                                </div>
+
+                                {/* Address */}
+                                <div className="bg-white p-6 rounded-lg">
+                                    <div className="w-14 h-14 bg-black rounded-lg flex items-center justify-center mb-4">
+                                        <MapPin className="w-7 h-7 text-white" />
+                                    </div>
+                                    <h3 className="font-serif text-lg mb-2">Visit Us</h3>
+                                    <p className="text-gray-600">{settings.address}</p>
+                                    {contact.officeHours && (
+                                        <p className="text-gray-500 text-sm mt-2">{contact.officeHours}</p>
+                                    )}
+                                </div>
+
+                                {/* Departments */}
+                                {contact.departments.length > 1 && (
+                                    <div className="bg-white p-6 rounded-lg">
+                                        <h3 className="font-serif text-lg mb-4">Departments</h3>
+                                        <div className="space-y-3">
+                                            {contact.departments.map((dept, idx) => (
+                                                <div key={idx} className="border-b border-gray-100 pb-3 last:border-0 last:pb-0">
+                                                    <p className="font-medium text-sm">{dept.name}</p>
+                                                    <a href={`mailto:${dept.email}`} className="text-gray-500 text-sm hover:text-black">
+                                                        {dept.email}
+                                                    </a>
+                                                    {dept.phone && (
+                                                        <p className="text-gray-500 text-sm">{dept.phone}</p>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
 
-                            <Card className="lg:col-span-2 p-8 md:p-10 card-elevated border border-gray-100">
-                                <h3 className="text-2xl font-bold text-gray-900 mb-2">Send us a message</h3>
+                            {/* Contact Form */}
+                            <div className="lg:col-span-2 bg-white p-8 rounded-lg">
+                                <h2 className="font-serif text-2xl mb-2">Send us a message</h2>
                                 <p className="text-gray-600 mb-8">Fill out the form below and we'll get back to you soon.</p>
 
-                                <form onSubmit={handleSubmit} className="space-y-6">
-                                    <div className="grid md:grid-cols-2 gap-6">
-                                        <div>
-                                            <label htmlFor="name" className="block text-sm font-semibold text-gray-900 mb-2">Your Name *</label>
-                                            <Input id="name" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="John Doe" required className="input-field h-12" />
+                                {contact.formEnabled ? (
+                                    <form onSubmit={handleSubmit} className="space-y-6">
+                                        <div className="grid md:grid-cols-2 gap-6">
+                                            <div>
+                                                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                                                    Your Name *
+                                                </label>
+                                                <input
+                                                    id="name"
+                                                    type="text"
+                                                    value={formData.name}
+                                                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                                    placeholder="John Doe"
+                                                    required
+                                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                                                    Email Address *
+                                                </label>
+                                                <input
+                                                    id="email"
+                                                    type="email"
+                                                    value={formData.email}
+                                                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                                    placeholder="john@example.com"
+                                                    required
+                                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
+                                                />
+                                            </div>
                                         </div>
                                         <div>
-                                            <label htmlFor="email" className="block text-sm font-semibold text-gray-900 mb-2">Email Address *</label>
-                                            <Input id="email" type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="john@example.com" required className="input-field h-12" />
+                                            <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                                                Subject *
+                                            </label>
+                                            <input
+                                                id="subject"
+                                                type="text"
+                                                value={formData.subject}
+                                                onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                                                placeholder="How can we help?"
+                                                required
+                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
+                                            />
                                         </div>
+                                        <div>
+                                            <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                                                Message *
+                                            </label>
+                                            <textarea
+                                                id="message"
+                                                value={formData.message}
+                                                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                                placeholder="Tell us more..."
+                                                rows={6}
+                                                required
+                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black resize-none"
+                                            />
+                                        </div>
+                                        <button type="submit" className="btn-primary w-full justify-center">
+                                            Send Message
+                                            <Send className="w-4 h-4" />
+                                        </button>
+                                    </form>
+                                ) : (
+                                    <div className="text-center py-12 text-gray-500">
+                                        <p>Contact form is currently disabled.</p>
+                                        <p className="mt-2">Please reach out via email or phone.</p>
                                     </div>
-                                    <div>
-                                        <label htmlFor="subject" className="block text-sm font-semibold text-gray-900 mb-2">Subject *</label>
-                                        <Input id="subject" value={formData.subject} onChange={(e) => setFormData({ ...formData, subject: e.target.value })} placeholder="How can we help?" required className="input-field h-12" />
-                                    </div>
-                                    <div>
-                                        <label htmlFor="message" className="block text-sm font-semibold text-gray-900 mb-2">Message *</label>
-                                        <Textarea id="message" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="Tell us more..." rows={6} required className="textarea-field" />
-                                    </div>
-                                    <Button type="submit" size="lg" className="w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold py-6 rounded-xl border-0">
-                                        Send Message
-                                        <Send className="ml-2 w-5 h-5" />
-                                    </Button>
-                                </form>
-                            </Card>
+                                )}
+                            </div>
                         </div>
+
+                        {/* Map */}
+                        {contact.mapEmbedUrl && (
+                            <div className="mt-12 rounded-lg overflow-hidden h-96">
+                                <iframe
+                                    src={contact.mapEmbedUrl}
+                                    width="100%"
+                                    height="100%"
+                                    style={{ border: 0 }}
+                                    allowFullScreen
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer-when-downgrade"
+                                    title="Location Map"
+                                />
+                            </div>
+                        )}
                     </div>
                 </section>
             </main>

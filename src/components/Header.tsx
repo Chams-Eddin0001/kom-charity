@@ -1,102 +1,148 @@
-import { Heart, Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { Button } from "./ui/button";
+import { Link, useLocation } from "react-router-dom";
+import { useAdminData } from "../hooks/useAdminData";
+import { useTheme } from "../context/ThemeContext";
 
 const Header = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const navigation = useAdminData('navigation');
+    const settings = useAdminData('settings');
+    const location = useLocation();
+    const { theme, toggleTheme } = useTheme();
 
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
         };
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const navLinks = [
-        { name: "Home", href: "/" },
-        { name: "About", href: "/about" },
-        { name: "Programs", href: "/programs" },
-        { name: "News", href: "/news" },
-        { name: "Get Involved", href: "/get-involved" },
-        { name: "Contact", href: "/contact" },
-    ];
+    // Close mobile menu on route change
+    useEffect(() => {
+        setMobileMenuOpen(false);
+    }, [location]);
 
     return (
-        <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${scrolled
-            ? 'bg-white border-b border-gray-200 shadow-sm'
-            : 'bg-white/95 border-b border-gray-100'
-            }`}>
-            <div className="container mx-auto px-4 py-4">
-                <div className="flex items-center justify-between">
-                    {/* Logo */}
-                    <Link to="/" className="flex items-center gap-2 group">
-                        <div className="bg-gray-900 p-2 rounded-lg group-hover:bg-gray-800 transition-colors">
-                            <Heart className="w-5 h-5 text-white" fill="currentColor" />
+        <>
+            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+                    ? 'header-blur header-scrolled py-3'
+                    : 'bg-transparent py-5'
+                }`}>
+                <div className="container mx-auto px-4">
+                    <nav className="flex items-center justify-between">
+                        {/* Logo */}
+                        <Link
+                            to="/"
+                            className="flex items-center gap-2 group"
+                        >
+                            <span className="font-serif text-xl md:text-2xl font-bold text-[var(--color-text)] group-hover:text-[var(--color-accent-purple)] transition-colors">
+                                {settings.organizationName}
+                            </span>
+                        </Link>
+
+                        {/* Desktop Navigation */}
+                        <div className="hidden md:flex items-center gap-8">
+                            {navigation.sort((a, b) => a.order - b.order).map(item => (
+                                <Link
+                                    key={item.id}
+                                    to={item.href}
+                                    className={`link-hover text-sm font-medium transition-colors ${location.pathname === item.href
+                                            ? 'text-[var(--color-accent-purple)]'
+                                            : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text)]'
+                                        }`}
+                                >
+                                    {item.name}
+                                </Link>
+                            ))}
                         </div>
-                        <span className="text-lg font-semibold text-gray-900">
-                            Kommunity Foundation
-                        </span>
-                    </Link>
 
-                    {/* Desktop Navigation */}
-                    <nav className="hidden md:flex items-center gap-6">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                to={link.href}
-                                className="text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium py-1"
+                        {/* Right Side Actions */}
+                        <div className="flex items-center gap-4">
+                            {/* Theme Toggle */}
+                            <button
+                                onClick={toggleTheme}
+                                className="theme-toggle"
+                                aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
                             >
-                                {link.name}
-                            </Link>
-                        ))}
+                                {theme === 'light' ? (
+                                    <Moon className="w-5 h-5 text-[var(--color-text-secondary)] hover:text-[var(--color-text)]" />
+                                ) : (
+                                    <Sun className="w-5 h-5 text-[var(--color-text-secondary)] hover:text-[var(--color-text)]" />
+                                )}
+                            </button>
+
+                            {/* Mobile Menu Button */}
+                            <button
+                                className="md:hidden p-2 -mr-2"
+                                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                                aria-label="Toggle menu"
+                            >
+                                {mobileMenuOpen ? (
+                                    <X className="w-6 h-6 text-[var(--color-text)]" />
+                                ) : (
+                                    <Menu className="w-6 h-6 text-[var(--color-text)]" />
+                                )}
+                            </button>
+                        </div>
                     </nav>
-
-                    {/* CTA Button */}
-                    <div className="hidden md:block">
-                        <Link to="/donate">
-                            <Button className="bg-gray-900 hover:bg-gray-800 text-white font-medium text-sm px-5 py-2 rounded-lg shadow-sm hover:shadow-md transition-all">
-                                Donate
-                                <Heart className="ml-2 w-4 h-4" fill="currentColor" />
-                            </Button>
-                        </Link>
-                    </div>
-
-                    {/* Mobile Menu Button */}
-                    <button
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        className="md:hidden p-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
-                        aria-label="Toggle menu"
-                    >
-                        {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-                    </button>
                 </div>
+            </header>
 
-                {/* Mobile Menu */}
-                {mobileMenuOpen && (
-                    <nav className="md:hidden mt-4 pb-4 flex flex-col gap-1 border-t border-gray-200 pt-4 animate-fade-in">
-                        {navLinks.map((link) => (
+            {/* Full-Screen Mobile Menu */}
+            <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
+                <div className="flex flex-col h-full pt-24 px-6">
+                    <nav className="flex flex-col gap-1">
+                        {navigation.sort((a, b) => a.order - b.order).map((item, index) => (
                             <Link
-                                key={link.name}
-                                to={link.href}
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="text-gray-600 hover:text-gray-900 hover:bg-gray-50 transition-all text-sm font-medium py-2 px-3 rounded-lg"
+                                key={item.id}
+                                to={item.href}
+                                className={`py-4 text-2xl font-serif border-b border-[var(--color-border)] animate-fade-in-up`}
+                                style={{ animationDelay: `${index * 100}ms` }}
                             >
-                                {link.name}
+                                {item.name}
                             </Link>
                         ))}
-                        <Link to="/donate" onClick={() => setMobileMenuOpen(false)}>
-                            <Button className="bg-gray-900 hover:bg-gray-800 text-white font-medium w-full text-sm mt-2 py-2 rounded-lg">
-                                Donate
-                                <Heart className="ml-2 w-4 h-4" fill="currentColor" />
-                            </Button>
-                        </Link>
                     </nav>
-                )}
+
+                    <div className="mt-auto pb-8">
+                        <p className="text-[var(--color-text-muted)] text-sm">
+                            {settings.contactEmail}
+                        </p>
+                    </div>
+                </div>
             </div>
-        </header>
+
+            {/* Scroll Progress Indicator */}
+            <ScrollProgress />
+        </>
+    );
+};
+
+// Scroll Progress Component
+const ScrollProgress = () => {
+    const [progress, setProgress] = useState(0);
+
+    useEffect(() => {
+        const updateProgress = () => {
+            const scrollTop = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            setProgress(scrollPercent);
+        };
+
+        window.addEventListener('scroll', updateProgress);
+        return () => window.removeEventListener('scroll', updateProgress);
+    }, []);
+
+    return (
+        <div
+            className="scroll-indicator"
+            style={{ width: `${progress}%` }}
+        />
     );
 };
 
