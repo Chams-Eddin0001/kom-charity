@@ -28,9 +28,9 @@ const Header = () => {
 
     return (
         <>
-            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-                    ? 'header-blur header-scrolled py-3'
-                    : 'bg-transparent py-5'
+            <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-black ${scrolled
+                ? 'header-blur header-scrolled py-3'
+                : 'bg-transparent py-5'
                 }`}>
                 <div className="container mx-auto px-4">
                     <nav className="flex items-center justify-between">
@@ -51,8 +51,8 @@ const Header = () => {
                                     key={item.id}
                                     to={item.href}
                                     className={`link-hover text-sm font-medium transition-colors ${location.pathname === item.href
-                                            ? 'text-[var(--color-accent-purple)]'
-                                            : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text)]'
+                                        ? 'text-[var(--color-accent-purple)]'
+                                        : 'text-[var(--color-text-secondary)] hover:text-[var(--color-text)]'
                                         }`}
                                 >
                                     {item.name}
