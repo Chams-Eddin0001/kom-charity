@@ -11,12 +11,12 @@ const NewsDetailPage = () => {
 
     if (!article) {
         return (
-            <div className="min-h-screen">
+            <div className="min-h-screen bg-[var(--color-bg)]">
                 <Header />
                 <main className="pt-28">
                     <div className="container mx-auto px-4 py-20 text-center">
-                        <h1 className="font-serif text-3xl mb-4">Article Not Found</h1>
-                        <p className="text-gray-600 mb-8">The article you're looking for doesn't exist.</p>
+                        <h1 className="font-serif text-3xl mb-4 text-[var(--color-text)]">Article Not Found</h1>
+                        <p className="text-[var(--color-text-secondary)] mb-8">The article you're looking for doesn't exist.</p>
                         <Link to="/news" className="btn-primary">
                             <ArrowLeft className="w-4 h-4" />
                             Back to News
@@ -34,12 +34,12 @@ const NewsDetailPage = () => {
         .slice(0, 3);
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen bg-[var(--color-bg)]">
             <Header />
             <main className="pt-28">
                 <article>
                     {/* Hero with Image */}
-                    <section className="relative h-[40vh] md:h-[50vh] bg-gray-100">
+                    <section className="relative h-[40vh] md:h-[50vh] bg-[var(--color-bg-alt)]">
                         {article.image ? (
                             <img
                                 src={article.image}
@@ -75,9 +75,9 @@ const NewsDetailPage = () => {
                     </section>
 
                     {/* Article Meta */}
-                    <section className="py-8 border-b border-gray-200">
+                    <section className="py-8 border-b border-[var(--color-border)] bg-[var(--color-bg)]">
                         <div className="container mx-auto px-4">
-                            <div className="flex flex-wrap items-center gap-6 text-gray-600">
+                            <div className="flex flex-wrap items-center gap-6 text-[var(--color-text-secondary)]">
                                 <div className="flex items-center gap-2">
                                     <Calendar className="w-5 h-5" />
                                     <span>{article.date}</span>
@@ -93,15 +93,15 @@ const NewsDetailPage = () => {
                     </section>
 
                     {/* Article Content */}
-                    <section className="py-12">
+                    <section className="py-12 bg-[var(--color-bg)]">
                         <div className="container mx-auto px-4">
                             <div className="max-w-3xl mx-auto">
-                                <p className="text-xl text-gray-600 leading-relaxed mb-8">
+                                <p className="text-xl text-[var(--color-text-secondary)] leading-relaxed mb-8">
                                     {article.excerpt}
                                 </p>
                                 {article.content && (
                                     <div
-                                        className="prose prose-lg max-w-none text-gray-700"
+                                        className="prose prose-lg dark:prose-invert max-w-none text-[var(--color-text-secondary)]"
                                         dangerouslySetInnerHTML={{ __html: article.content }}
                                     />
                                 )}
@@ -111,17 +111,17 @@ const NewsDetailPage = () => {
 
                     {/* Related Articles */}
                     {relatedArticles.length > 0 && (
-                        <section className="py-16 bg-[#f7f7f7]">
+                        <section className="py-16 bg-[var(--color-bg-alt)]">
                             <div className="container mx-auto px-4">
-                                <h2 className="font-serif text-2xl md:text-3xl mb-8">Related Articles</h2>
+                                <h2 className="font-serif text-2xl md:text-3xl mb-8 text-[var(--color-text)]">Related Articles</h2>
                                 <div className="grid md:grid-cols-3 gap-8">
                                     {relatedArticles.map((related) => (
                                         <Link
                                             key={related.id}
                                             to={`/news/${related.slug}`}
-                                            className="group bg-white rounded-lg overflow-hidden hover:shadow-lg transition-all"
+                                            className="group bg-[var(--color-card)] rounded-lg overflow-hidden hover:shadow-lg transition-all"
                                         >
-                                            <div className="aspect-[4/3] relative overflow-hidden bg-gray-100">
+                                            <div className="aspect-[4/3] relative overflow-hidden bg-[var(--color-bg-alt)]">
                                                 {related.image ? (
                                                     <img
                                                         src={related.image}
@@ -133,10 +133,10 @@ const NewsDetailPage = () => {
                                                 )}
                                             </div>
                                             <div className="p-6">
-                                                <h3 className="font-serif text-lg group-hover:text-gray-600 transition-colors">
+                                                <h3 className="font-serif text-lg text-[var(--color-text)] group-hover:text-[var(--color-accent-purple)] transition-colors">
                                                     {related.title}
                                                 </h3>
-                                                <span className="inline-flex items-center gap-1 text-sm text-gray-500 mt-2">
+                                                <span className="inline-flex items-center gap-1 text-sm text-[var(--color-text-muted)] mt-2">
                                                     Read More
                                                     <ArrowRight className="w-3 h-3" />
                                                 </span>

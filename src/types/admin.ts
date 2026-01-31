@@ -137,14 +137,16 @@ export interface AdminData {
 export const defaultAdminData: AdminData = {
     settings: {
         organizationName: "Kommunity Foundation",
-        tagline: "Unlocking Human Potential",
-        contactEmail: "info@kommunity.org",
-        contactPhone: "+27 11 123 4567",
-        address: "University of Johannesburg, South Africa",
-        socialLinks: {}
+        tagline: "Unlocking Human Potential Through Education & Research",
+        contactEmail: "kouahada@uj.ac.za",
+        contactPhone: "+27 11 559 3864",
+        address: "Department of Electrical and Electronic Engineering Science, Faculty of Engineering and the Built Environment, University of Johannesburg, South Africa",
+        socialLinks: {
+            linkedin: "https://www.linkedin.com/in/khmaies-ouahada/",
+        }
     },
     hero: {
-        headline: "At the heart of everything we do is the knowledge that our future lies in unlocking the most precious resource of all—human potential.",
+        headline: "At the heart of everything we do is the knowledge that our future lies in unlocking the most precious resource of all—human potential through education, research, and innovation.",
         highlightWords: [
             { text: "unlocking", type: "mint" },
             { text: "human potential", type: "coral" }
@@ -152,8 +154,8 @@ export const defaultAdminData: AdminData = {
         interestOptions: [
             { value: "programs", label: "Our Programs" },
             { value: "education", label: "Education Initiatives" },
-            { value: "community", label: "Community Development" },
             { value: "research", label: "Research & Innovation" },
+            { value: "smart-tech", label: "Smart Technologies" },
             { value: "stories", label: "Impact Stories" }
         ],
         quickLinks: [
@@ -164,33 +166,40 @@ export const defaultAdminData: AdminData = {
         ]
     },
     stats: [
-        { id: "1", number: "15+", label: "Years of Impact", order: 1 },
-        { id: "2", number: "50+", label: "Programs", order: 2 },
-        { id: "3", number: "10K+", label: "Lives Touched", order: 3 },
-        { id: "4", number: "25", label: "Communities", order: 4 }
+        { id: "1", number: "186+", label: "Research Publications", order: 1 },
+        { id: "2", number: "2100+", label: "Citations", order: 2 },
+        { id: "3", number: "19+", label: "Postgraduate Students", order: 3 },
+        { id: "4", number: "23", label: "H-Index", order: 4 }
     ],
     programs: [
-        { id: "1", name: "Education", description: "Building foundations for lifelong learning", order: 1 },
-        { id: "2", name: "Community Development", description: "Strengthening local communities", order: 2 },
-        { id: "3", name: "Research & Innovation", description: "Advancing knowledge for impact", order: 3 },
-        { id: "4", name: "Youth Empowerment", description: "Nurturing tomorrow's leaders", order: 4 }
+        { id: "1", name: "Telecommunications & 5G Research", description: "Advancing wireless and wired communication technologies including 5G millimeter wave connectivity, power-line communications, and visible light communications.", order: 1 },
+        { id: "2", name: "Artificial Intelligence & Machine Learning", description: "AI-driven solutions for medical imaging, drug-target interaction prediction, and intelligent systems for healthcare and education.", order: 2 },
+        { id: "3", name: "Smart Home & Smart Cities", description: "Research on smart grid technologies, energy demand management, renewable energy, and sustainable intelligent infrastructure through the Smart Home Lab.", order: 3 },
+        { id: "4", name: "Engineering Education", description: "Innovative pedagogical methods to enhance the training of future engineers with focus on constructivism and peer collaborative learning.", order: 4 }
     ],
     news: [
-        { id: "1", category: "Story", title: "Empowering Communities Through Education", excerpt: "How our programs are transforming lives across communities.", slug: "empowering-communities", date: "2026-01-15", featured: true },
-        { id: "2", category: "Event", title: "Annual Community Summit 2026", excerpt: "Join us for our flagship event bringing together changemakers.", slug: "annual-summit-2026", date: "2026-03-20", featured: true }
+        { id: "1", category: "News", title: "Machine Learning for Medical Image Analysis", excerpt: "New research on transformer-inspired training principles for breast cancer prediction, combining EfficientNetB0 and ResNet50 architectures.", slug: "machine-learning-medical-image", date: "2025-01-15", featured: true, author: "Prof. Khmaies Ouahada" },
+        { id: "2", category: "News", title: "Large Language Models in Education", excerpt: "A comprehensive review published on LLMs: addressing issues and solutions in learning environments for improved educational outcomes.", slug: "llm-education", date: "2024-12-10", featured: true, author: "Prof. Khmaies Ouahada" },
+        { id: "3", category: "News", title: "5G Millimeter Wave Connectivity", excerpt: "New effective path loss modeling approach for 5G millimeter wave connectivity published, advancing telecommunications research.", slug: "5g-millimeter-wave", date: "2024-11-20", featured: false, author: "Prof. Khmaies Ouahada" }
     ],
     team: [
-        { id: "1", name: "Prof. Khmaies Ouahada", role: "Founder & Director", bio: "Leading the foundation with vision and dedication.", order: 1 }
+        { id: "1", name: "Prof. Khmaies Ouahada", role: "Founder & Director", bio: "Full Professor in the Department of Electrical and Electronic Engineering Science at the University of Johannesburg. Former Head of Department (2018-2021), Vice-Chancellor's Teaching and Learning Excellence Award recipient (2016), NRF-rated researcher (C3), IEEE Senior Member, and Chairman of the Smart Home Lab. DEng, MIng, BScEng.", order: 1 }
     ],
-    partners: [],
+    partners: [
+        { id: "1", name: "University of Johannesburg", website: "https://www.uj.ac.za", order: 1 },
+        { id: "2", name: "IEEE", website: "https://www.ieee.org", order: 2 },
+        { id: "3", name: "South African Institute of Electrical Engineers (SAIEE)", website: "https://www.saiee.org.za", order: 3 },
+        { id: "4", name: "National Research Foundation (NRF)", website: "https://www.nrf.ac.za", order: 4 }
+    ],
     about: {
-        mission: "To unlock human potential through education, research, and community development.",
-        vision: "A world where every individual has the opportunity to reach their full potential.",
-        history: "Founded with a vision to create lasting change in communities.",
+        mission: "To unlock human potential through education, research, and innovation in electrical engineering, telecommunications, and smart technologies, contributing to South Africa's economic development by educating highly skilled engineers.",
+        vision: "A world where every individual has access to quality education and the opportunity to contribute to technological advancement and sustainable development.",
+        history: "Founded by Professor Khmaies Ouahada, a distinguished academic and researcher at the University of Johannesburg who completed his M.Eng. with distinction (2002) and D.Eng. (2009) degrees. With extensive experience in the telecommunications industry and over 186 research publications, Professor Ouahada established the Kommunity Foundation to extend his commitment to education and community development beyond academia. He serves as Chairman of the Smart Home Lab and is the founder and Co-Chairman of the Centre for Smart Communications Systems at UJ.",
         values: [
-            { title: "Excellence", description: "Striving for the highest standards in everything we do." },
-            { title: "Integrity", description: "Acting with honesty and transparency." },
-            { title: "Impact", description: "Focusing on meaningful, measurable outcomes." }
+            { title: "Academic Excellence", description: "Striving for the highest standards in teaching, research, and innovation as demonstrated by numerous awards and recognition." },
+            { title: "Integrity & Ethics", description: "Acting with honesty, transparency, and ethical values in all academic and community endeavors." },
+            { title: "Mentorship", description: "Dedicated supervision and guidance of postdoctoral researchers, doctoral students, and master's students to foster the next generation of engineers." },
+            { title: "Community Impact", description: "Going beyond traditional teaching by supporting students facing difficulties and ensuring access to essential academic resources." }
         ]
     },
     navigation: [
@@ -218,7 +227,9 @@ export const defaultAdminData: AdminData = {
         {
             id: "3", title: "Resources", links: [
                 { name: "Annual Reports", href: "/annual-reports" },
-                { name: "Impact Stories", href: "/impact-stories" }
+                { name: "Impact Stories", href: "/impact-stories" },
+                { name: "Google Scholar", href: "https://scholar.google.com/citations?user=edQN5XwAAAAJ&hl=en" },
+                { name: "Scopus Profile", href: "https://www.scopus.com/authid/detail.uri?authorId=13806775600" }
             ]
         }
     ],
@@ -228,7 +239,9 @@ export const defaultAdminData: AdminData = {
         formEnabled: true,
         officeHours: "Monday - Friday: 8:00 AM - 5:00 PM",
         departments: [
-            { name: "General Inquiries", email: "info@kommunity.org" }
+            { name: "General Inquiries", email: "kouahada@uj.ac.za", phone: "+27 11 559 3864" },
+            { name: "Smart Home Lab", email: "kouahada@uj.ac.za" },
+            { name: "Centre for Smart Communications Systems", email: "kouahada@uj.ac.za" }
         ]
     }
 };
