@@ -1,18 +1,10 @@
 import { ArrowRight, Mail, Facebook, Twitter, Linkedin, Instagram, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useAdminData } from "../hooks/useAdminData";
-import { useState } from "react";
 
 const Footer = () => {
     const footer = useAdminData('footer');
     const settings = useAdminData('settings');
-    const [email, setEmail] = useState('');
-
-    const handleNewsletterSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        console.log('Newsletter signup:', email);
-        setEmail('');
-    };
 
     const socialIcons: Record<string, React.ElementType> = {
         facebook: Facebook,
@@ -30,25 +22,9 @@ const Footer = () => {
                     <div className="max-w-md">
                         <h3 className="font-serif text-2xl mb-2 text-neutral-900 dark:text-white">Stay Updated</h3>
                         <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-                            Subscribe to our newsletter for the latest news and updates.
+                            Follow us on social media for the latest news and updates.
                         </p>
                     </div>
-                    <form onSubmit={handleNewsletterSubmit} className="flex gap-3 w-full md:w-auto">
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Enter your email"
-                            className="flex-1 md:w-64 px-4 py-3 bg-white dark:bg-white/10 border border-neutral-300 dark:border-white/20 rounded-lg text-neutral-900 dark:text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 dark:focus:border-white/40 transition-colors"
-                            required
-                        />
-                        <button
-                            type="submit"
-                            className="px-6 py-3 bg-[var(--color-accent-purple)] hover:bg-[var(--color-accent-purple)]/90 text-white rounded-lg font-medium transition-all hover:-translate-y-0.5"
-                        >
-                            Subscribe
-                        </button>
-                    </form>
                 </div>
 
                 {/* Main Footer Content */}
