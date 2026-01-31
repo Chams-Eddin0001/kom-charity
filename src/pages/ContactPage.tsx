@@ -61,17 +61,17 @@ const ContactPage = () => {
     };
 
     return (
-        <div className="min-h-screen">
+        <div className="min-h-screen bg-[var(--color-bg)]">
             <Header />
             <main className="pt-28">
                 {/* Hero Section */}
-                <section className="py-16 md:py-24 bg-white">
+                <section className="py-16 md:py-24 bg-[var(--color-bg)]">
                     <div className="container mx-auto px-4">
                         <div className="max-w-3xl">
-                            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-6">
+                            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl mb-6 text-[var(--color-text)]">
                                 Get In <span className="highlight-purple">Touch</span>
                             </h1>
-                            <p className="text-xl text-gray-600 leading-relaxed">
+                            <p className="text-xl text-[var(--color-text-secondary)] leading-relaxed">
                                 Have questions or want to learn more about our work? We'd love to hear from you.
                             </p>
                         </div>
@@ -79,58 +79,58 @@ const ContactPage = () => {
                 </section>
 
                 {/* Contact Content */}
-                <section className="py-16 bg-[#f7f7f7]">
+                <section className="py-16 bg-[var(--color-bg-alt)]">
                     <div className="container mx-auto px-4">
                         <div className="grid lg:grid-cols-3 gap-8">
                             {/* Contact Info Column */}
                             <div className="space-y-6">
                                 {/* Email */}
-                                <div className="bg-white p-6 rounded-lg">
+                                <div className="bg-[var(--color-card)] p-6 rounded-lg">
                                     <div className="w-14 h-14 bg-[#9333EA] rounded-lg flex items-center justify-center mb-4">
-                                        <Mail className="w-7 h-7 text-black" />
+                                        <Mail className="w-7 h-7 text-white" />
                                     </div>
-                                    <h3 className="font-serif text-lg mb-2">Email Us</h3>
-                                    <a href={`mailto:${settings.contactEmail}`} className="text-gray-600 hover:text-black transition-colors">
+                                    <h3 className="font-serif text-lg mb-2 text-[var(--color-text)]">Email Us</h3>
+                                    <a href={`mailto:${settings.contactEmail}`} className="text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors">
                                         {settings.contactEmail}
                                     </a>
                                 </div>
 
                                 {/* Phone */}
-                                <div className="bg-white p-6 rounded-lg">
+                                <div className="bg-[var(--color-card)] p-6 rounded-lg">
                                     <div className="w-14 h-14 bg-[#FF7A52] rounded-lg flex items-center justify-center mb-4">
                                         <Phone className="w-7 h-7 text-white" />
                                     </div>
-                                    <h3 className="font-serif text-lg mb-2">Call Us</h3>
-                                    <a href={`tel:${settings.contactPhone}`} className="text-gray-600 hover:text-black transition-colors">
+                                    <h3 className="font-serif text-lg mb-2 text-[var(--color-text)]">Call Us</h3>
+                                    <a href={`tel:${settings.contactPhone}`} className="text-[var(--color-text-secondary)] hover:text-[var(--color-text)] transition-colors">
                                         {settings.contactPhone}
                                     </a>
                                 </div>
 
                                 {/* Address */}
-                                <div className="bg-white p-6 rounded-lg">
-                                    <div className="w-14 h-14 bg-black rounded-lg flex items-center justify-center mb-4">
-                                        <MapPin className="w-7 h-7 text-white" />
+                                <div className="bg-[var(--color-card)] p-6 rounded-lg">
+                                    <div className="w-14 h-14 bg-[var(--color-text)] rounded-lg flex items-center justify-center mb-4">
+                                        <MapPin className="w-7 h-7 text-[var(--color-bg)]" />
                                     </div>
-                                    <h3 className="font-serif text-lg mb-2">Visit Us</h3>
-                                    <p className="text-gray-600">{settings.address}</p>
+                                    <h3 className="font-serif text-lg mb-2 text-[var(--color-text)]">Visit Us</h3>
+                                    <p className="text-[var(--color-text-secondary)]">{settings.address}</p>
                                     {contact.officeHours && (
-                                        <p className="text-gray-500 text-sm mt-2">{contact.officeHours}</p>
+                                        <p className="text-[var(--color-text-muted)] text-sm mt-2">{contact.officeHours}</p>
                                     )}
                                 </div>
 
                                 {/* Departments */}
                                 {contact.departments.length > 1 && (
-                                    <div className="bg-white p-6 rounded-lg">
-                                        <h3 className="font-serif text-lg mb-4">Departments</h3>
+                                    <div className="bg-[var(--color-card)] p-6 rounded-lg">
+                                        <h3 className="font-serif text-lg mb-4 text-[var(--color-text)]">Departments</h3>
                                         <div className="space-y-3">
                                             {contact.departments.map((dept, idx) => (
-                                                <div key={idx} className="border-b border-gray-100 pb-3 last:border-0 last:pb-0">
-                                                    <p className="font-medium text-sm">{dept.name}</p>
-                                                    <a href={`mailto:${dept.email}`} className="text-gray-500 text-sm hover:text-black">
+                                                <div key={idx} className="border-b border-[var(--color-border)] pb-3 last:border-0 last:pb-0">
+                                                    <p className="font-medium text-sm text-[var(--color-text)]">{dept.name}</p>
+                                                    <a href={`mailto:${dept.email}`} className="text-[var(--color-text-muted)] text-sm hover:text-[var(--color-text)]">
                                                         {dept.email}
                                                     </a>
                                                     {dept.phone && (
-                                                        <p className="text-gray-500 text-sm">{dept.phone}</p>
+                                                        <p className="text-[var(--color-text-muted)] text-sm">{dept.phone}</p>
                                                     )}
                                                 </div>
                                             ))}
@@ -140,15 +140,15 @@ const ContactPage = () => {
                             </div>
 
                             {/* Contact Form */}
-                            <div className="lg:col-span-2 bg-white p-8 rounded-lg">
-                                <h2 className="font-serif text-2xl mb-2">Send us a message</h2>
-                                <p className="text-gray-600 mb-8">Fill out the form below and we'll get back to you soon.</p>
+                            <div className="lg:col-span-2 bg-[var(--color-card)] p-8 rounded-lg">
+                                <h2 className="font-serif text-2xl mb-2 text-[var(--color-text)]">Send us a message</h2>
+                                <p className="text-[var(--color-text-secondary)] mb-8">Fill out the form below and we'll get back to you soon.</p>
 
                                 {contact.formEnabled ? (
                                     <form onSubmit={handleSubmit} className="space-y-6">
                                         <div className="grid md:grid-cols-2 gap-6">
                                             <div>
-                                                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                                                <label htmlFor="name" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
                                                     Your Name *
                                                 </label>
                                                 <input
@@ -158,11 +158,11 @@ const ContactPage = () => {
                                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                                     placeholder="John Doe"
                                                     required
-                                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
+                                                    className="w-full px-4 py-3 border border-[var(--color-border)] rounded-lg bg-[var(--color-bg)] text-[var(--color-text)] focus:outline-none focus:border-[var(--color-text)]"
                                                 />
                                             </div>
                                             <div>
-                                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                                                <label htmlFor="email" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
                                                     Email Address *
                                                 </label>
                                                 <input
@@ -172,12 +172,12 @@ const ContactPage = () => {
                                                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                                                     placeholder="john@example.com"
                                                     required
-                                                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
+                                                    className="w-full px-4 py-3 border border-[var(--color-border)] rounded-lg bg-[var(--color-bg)] text-[var(--color-text)] focus:outline-none focus:border-[var(--color-text)]"
                                                 />
                                             </div>
                                         </div>
                                         <div>
-                                            <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                                            <label htmlFor="subject" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
                                                 Subject *
                                             </label>
                                             <input
@@ -187,11 +187,11 @@ const ContactPage = () => {
                                                 onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                                                 placeholder="How can we help?"
                                                 required
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black"
+                                                className="w-full px-4 py-3 border border-[var(--color-border)] rounded-lg bg-[var(--color-bg)] text-[var(--color-text)] focus:outline-none focus:border-[var(--color-text)]"
                                             />
                                         </div>
                                         <div>
-                                            <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                                            <label htmlFor="message" className="block text-sm font-medium text-[var(--color-text-secondary)] mb-2">
                                                 Message *
                                             </label>
                                             <textarea
@@ -201,7 +201,7 @@ const ContactPage = () => {
                                                 placeholder="Tell us more..."
                                                 rows={6}
                                                 required
-                                                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-black resize-none"
+                                                className="w-full px-4 py-3 border border-[var(--color-border)] rounded-lg bg-[var(--color-bg)] text-[var(--color-text)] focus:outline-none focus:border-[var(--color-text)] resize-none"
                                             />
                                         </div>
                                         <button type="submit" className="btn-primary w-full justify-center">
@@ -210,7 +210,7 @@ const ContactPage = () => {
                                         </button>
                                     </form>
                                 ) : (
-                                    <div className="text-center py-12 text-gray-500">
+                                    <div className="text-center py-12 text-[var(--color-text-muted)]">
                                         <p>Contact form is currently disabled.</p>
                                         <p className="mt-2">Please reach out via email or phone.</p>
                                     </div>

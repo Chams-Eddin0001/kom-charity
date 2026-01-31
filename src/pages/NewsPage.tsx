@@ -37,42 +37,42 @@ const NewsPage = () => {
     ];
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-[var(--color-bg)]">
             <Header />
             <main className="pt-20">
-                <section className="py-16 md:py-20 bg-gradient-to-b from-gray-50 to-white">
+                <section className="py-16 md:py-20 bg-[var(--color-bg)]">
                     <div className="container mx-auto px-4">
                         <div className="section-header">
-                            <span className="inline-block bg-gray-100 text-gray-600 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
+                            <span className="inline-block bg-[var(--color-bg-alt)] text-[var(--color-text-secondary)] px-4 py-1.5 rounded-full text-sm font-medium mb-4">
                                 Research Updates
                             </span>
-                            <h1 className="section-title">News & Publications</h1>
-                            <p className="section-description">
+                            <h1 className="section-title text-[var(--color-text)]">News & Publications</h1>
+                            <p className="section-description text-[var(--color-text-secondary)]">
                                 Stay informed about the latest research publications and achievements from Professor Khmaies Ouahada's team.
                             </p>
                         </div>
 
                         <div className="grid md:grid-cols-3 gap-6 mb-12">
                             {newsItems.map((item, index) => (
-                                <Card key={index} className="overflow-hidden border border-gray-200 rounded-xl shadow-sm hover:shadow-md hover:border-gray-300 transition-all group">
+                                <Card key={index} className="overflow-hidden border border-[var(--color-border)] bg-[var(--color-card)] rounded-xl shadow-sm hover:shadow-md transition-all group">
                                     <div className="relative h-48 overflow-hidden">
                                         <img
                                             src={item.image}
                                             alt={item.title}
                                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                         />
-                                        <div className="absolute top-3 left-3 bg-white text-gray-700 px-3 py-1 rounded-full text-xs font-medium shadow-sm">
+                                        <div className="absolute top-3 left-3 bg-[var(--color-bg)] text-[var(--color-text-secondary)] px-3 py-1 rounded-full text-xs font-medium shadow-sm">
                                             {item.category}
                                         </div>
                                     </div>
                                     <div className="p-5">
-                                        <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
+                                        <div className="flex items-center gap-2 text-sm text-[var(--color-text-muted)] mb-3">
                                             <Calendar className="w-4 h-4" />
                                             <span>{item.date}</span>
                                         </div>
-                                        <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
-                                        <p className="text-gray-600 text-sm mb-4 leading-relaxed">{item.excerpt}</p>
-                                        <Link to={`/news/${item.slug}`} className="inline-flex items-center gap-1 text-gray-700 font-medium text-sm hover:text-purple-600 transition-colors group">
+                                        <h3 className="text-lg font-semibold text-[var(--color-text)] mb-2">{item.title}</h3>
+                                        <p className="text-[var(--color-text-secondary)] text-sm mb-4 leading-relaxed">{item.excerpt}</p>
+                                        <Link to={`/news/${item.slug}`} className="inline-flex items-center gap-1 text-[var(--color-text)] font-medium text-sm hover:text-[var(--color-accent-purple)] transition-colors group">
                                             Read More
                                             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                         </Link>
@@ -83,7 +83,7 @@ const NewsPage = () => {
 
                         <div className="text-center">
                             <Link to="/all-news">
-                                <Button variant="outline" className="border border-gray-300 text-gray-700 hover:bg-gray-50 font-medium px-6 py-2 rounded-lg">
+                                <Button variant="outline" className="border border-[var(--color-border)] text-[var(--color-text)] hover:bg-[var(--color-bg-alt)] font-medium px-6 py-2 rounded-lg">
                                     View All News
                                     <ArrowRight className="ml-2 w-4 h-4" />
                                 </Button>
